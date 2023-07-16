@@ -9,12 +9,7 @@ Point sticker_bottom = Point.get(1263, 487);
 
 int step = 115;
 
-Point[] buy_buttons = { 
-    Point.get(1568, 506),
-    Point.get(1568, 622), 
-    Point.get(1568, 733), 
-    Point.get(1568, 852)
-};
+Point buy_button = Point.get(1715, 470);
 
 long time = Time.getMillis();
 
@@ -24,21 +19,22 @@ sleep(200);
 
 while (!EXIT)
 {
-    Point top = sticker_top;
-    Point bottom = sticker_bottom;
-
-    for (int line = 0; line < buy_buttons.length; line++)
+    for (int line = 0; line < 4; line++)
     {
-        if (getContoursCount(top, bottom) > 3)
+        Point top = Point.get(sticker_top.x, sticker_top.y + step * line);
+        Point bottom = Point.get(sticker_bottom.x, sticker_bottom.y + step * line);
+
+        Point center = Point.get(1243, 472); // third sticker
+
+        if (getContoursCount(top, bottom) > 3 && !(getColor(center) > 14000000 && getColor(center) < 15000000))
         {
-            click(buy_buttons[line]);
+            click(Point.get(buy_button.x, buy_button.y + step * line));
             sleepRand(450, 550);
             click(confirm_button);
+
+            EXIT = true;
             break;
         }
-
-        top.y += step;
-        bottom.y += step;
     }
 
     if ((Time.getMillis() - time) > rand(3000, 5000)) 
@@ -47,7 +43,7 @@ while (!EXIT)
         sleepRand(150, 250);
         click(update_button);
 
-        while (getColor(buy_buttons[0]) > 11000000)
+        while (getColor(buy_button) > 11000000)
             sleep(200);
 
         time = Time.getMillis();
