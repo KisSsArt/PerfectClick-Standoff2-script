@@ -3,13 +3,13 @@
 // update this yourself
 Point update_button = Point.get(719, 365);
 Point confirm_button = Point.get(931, 716);
+Point buy_button = Point.get(1715, 470);
 
 Point sticker_top = Point.get(1141, 453);
 Point sticker_bottom = Point.get(1263, 487);
+//
 
 int step = 115;
-
-Point buy_button = Point.get(1715, 470);
 
 long time = Time.getMillis();
 
